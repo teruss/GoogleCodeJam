@@ -23,11 +23,11 @@ Feature: Solve problem
     Then I see the output file
     And check with the expected file
     
-  # Scenario: Solve large
-  #   Given a file A-large-practice.in
-  #   When I execute program with A-large-practice
-  #   Then the output file A-large-practice.out is there
-  #   And check the A-large-practice.out with A-large-practice.expected
+  Scenario: Solve large
+    Given a input file for C-large-practice
+    When I execute the input file
+    Then I see the output file
+    And check with the expected file
 
   # Scenario: Solve sample by ruby
   #   Given a file sample.in and sample.expected
