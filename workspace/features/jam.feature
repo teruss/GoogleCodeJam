@@ -1,7 +1,20 @@
 Feature: Solve problem
+  Scenario: Create Makefile using CMake
+    Given a file CMakeLists.txt
+    When I create build directory
+    And I move to the build directory
+    And I execute command "cmake .."
+    Then I see a Makefile
+
+  Scenario: Execute Makefile to create execute file
+    Given a file Makefile
+    When I execute command "make"
+    Then I see a exec
+
   Scenario: Solve
-    Given a file sample.in and sample.expected
-    When I execute program with sample
+    Given a file exec
+    When I move to the .. directory
+    And I execute command "build/exec < sample.in > sample.out"
     Then check the sample.out with sample.expected
     
   # Scenario: Solve

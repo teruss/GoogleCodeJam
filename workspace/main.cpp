@@ -1,18 +1,20 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <string>
 using namespace std;
 
 long solve(int x) {
-    return 0;
+    return x;
 }
 
 string result() {
     int x;
     cin >> x;
-    return "" + solve(x);
+    return to_string(solve(x));
 }
 
+#ifndef CATCH_CONFIG_MAIN
 int main() {
     int T;
     cin >> T;
@@ -21,3 +23,4 @@ int main() {
     }
     return 0;
 }
+#endif

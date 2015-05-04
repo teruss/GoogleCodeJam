@@ -1,11 +1,29 @@
+import os
 import os.path
 from behave import *
 import shlex, subprocess
 
+@when(u'I create build directory')
+def step_impl(context):
+    if not os.path.exists("build"):
+        os.mkdir("build")
+
+@when(u'I move to the {name} directory')
+def step_impl(context, name):
+    os.chdir(name)
+
+@when(u'I execute command "{command}"')
+def step_impl(context, command):
+    subprocess.call(command, shell=True)
+
+@then(u'I see a {filename}')
+def step_impl(context, filename):
+    assert os.path.isfile(filename)
+
 @given(u'a file sample.in and sample.expected')
 def step_impl(context):
-    assert os.path.isfile("sample.in") is True
-    assert os.path.isfile("sample.expected") is True
+    assert os.path.isfile("sample.in")
+    assert os.path.isfile("sample.expected")
 
 @given(u'a file {filename}')
 def step_impl(context, filename):
@@ -13,7 +31,7 @@ def step_impl(context, filename):
 
 @when(u'I execute program with {program}')
 def step_impl(context, program):
-    p = subprocess.call("build/bin/exec < " + program + ".in > " + program + ".out", shell=True)
+    p = subprocess.call("build/exec < " + program + ".in > " + program + ".out", shell=True)
     assert p is 0
 
 @then(u'the output file {filename} is there')
