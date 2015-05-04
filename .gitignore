@@ -3,3 +3,4 @@
 *.py~
 *.out
 workspace/build
+*.pyc
