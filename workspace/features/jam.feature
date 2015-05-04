@@ -17,10 +17,11 @@ Feature: Solve problem
     And I execute command "build/exec < sample.in > sample.out"
     Then check the sample.out with sample.expected
     
-  # Scenario: Solve
-  #   Given a file A-small-practice.in
-  #   When I execute program with A-small-practice
-  #   Then check the A-small-practice.out with A-small-practice.expected
+  Scenario: Solve
+    Given a input file for C-small-practice
+    When I execute the input file
+    Then I see the output file
+    And check with the expected file
     
   # Scenario: Solve large
   #   Given a file A-large-practice.in

@@ -29,6 +29,21 @@ def step_impl(context):
 def step_impl(context, filename):
     assert os.path.isfile(filename) is True
 
+@given(u'a input file for {program}')
+def step_impl(context, program):
+    assert os.path.isfile(program + ".in")
+    context.program = program
+
+@when(u'I execute the input file')
+def step_impl(context):
+    program = context.program
+    p = subprocess.call("build/exec < " + program + ".in > " + program + ".out", shell=True)
+    assert p is 0
+
+@then(u'I see the output file')
+def step_impl(context):
+    assert os.path.isfile(context.program + ".out")
+
 @when(u'I execute program with {program}')
 def step_impl(context, program):
     p = subprocess.call("build/exec < " + program + ".in > " + program + ".out", shell=True)
@@ -45,8 +60,7 @@ def step_impl(context, filename):
     print(p)
     assert p is 0
 
-@then(u'check the {filename1} with {filename2}')
-def step_impl(context, filename1, filename2):
+def compare_files(filename1, filename2):
     f1 = open(filename1)
     f2 = open(filename2)
 
@@ -60,6 +74,15 @@ def step_impl(context, filename1, filename2):
         print (file1lines[i] + "," + file2lines[i])
         print (file1lines[i] == file2lines[i])
         assert file1lines[i] == file2lines[i]
+    
+@then(u'check the {filename1} with {filename2}')
+def step_impl(context, filename1, filename2):
+    compare_files(filename1, filename2)
+
+@then(u'check with the expected file')
+def step_impl(context):
+    p = context.program
+    compare_files(p + ".out", p + ".expected")
 
 @when(u'I execute python with {filename}')
 def step_impl(context, filename):

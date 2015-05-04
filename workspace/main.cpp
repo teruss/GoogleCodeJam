@@ -30,6 +30,7 @@ int calc(int a, int b) {
 int solve(int P_, const vector<int> &p_) {
     P = P_;
     p = p_;
+    memo.clear();
     return calc(1, P);
 }
 
