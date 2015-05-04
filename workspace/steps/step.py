@@ -84,8 +84,15 @@ def step_impl(context):
     p = context.program
     compare_files(p + ".out", p + ".expected")
 
-@when(u'I execute python with {filename}')
-def step_impl(context, filename):
-    command = "python main.py < " + filename + ".in > "+filename+".out"
+def exec_python(program):
+    command = "python main.py < {0}.in > {0}.out".format(program)
     p = subprocess.call(command, shell=True)
     assert p is 0
+    
+@when(u'I execute python with {filename}')
+def step_impl(context, filename):
+    exec_python(filename)
+
+@when(u'I execute python using the input file')
+def step_impl(context):
+    exec_python(context.program)
