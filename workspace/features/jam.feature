@@ -17,16 +17,17 @@ Feature: Solve problem
     And I execute command "build/exec < sample.in > sample.out"
     Then check the sample.out with sample.expected
     
-  # Scenario: Solve
-  #   Given a file A-small-practice.in
-  #   When I execute program with A-small-practice
-  #   Then check the A-small-practice.out with A-small-practice.expected
+  Scenario: Solve
+    Given a input file for C-small-practice
+    When I execute the input file
+    Then I see the output file
+    And check with the expected file
     
-  # Scenario: Solve large
-  #   Given a file A-large-practice.in
-  #   When I execute program with A-large-practice
-  #   Then the output file A-large-practice.out is there
-  #   And check the A-large-practice.out with A-large-practice.expected
+  Scenario: Solve large
+    Given a input file for C-large-practice
+    When I execute the input file
+    Then I see the output file
+    And check with the expected file
 
   # Scenario: Solve sample by ruby
   #   Given a file sample.in and sample.expected
