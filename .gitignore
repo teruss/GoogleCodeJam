@@ -2,3 +2,4 @@
 *.rb~
 *.py~
 *.out
+workspace/build
