@@ -5,13 +5,13 @@ Feature: Solve problem
     Then check the sample.out with sample.expected
 
   Scenario: Solve small by python
-    Given a input file for A-small-practice
+    Given a input file for C-small-practice-1
     When I execute python using the input file
     Then I see the output file
     And check with the expected file
     
   Scenario: Solve large by python
-    Given a input file for A-large-practice
+    Given a input file for C-small-practice-2
     When I execute python using the input file
     Then I see the output file
     And check with the expected file
