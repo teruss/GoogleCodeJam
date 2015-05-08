@@ -1,60 +1,40 @@
 import math
-import os.path
 
-def createP(A):
-    def createB(a):
-        m = {}
-        for y in range(1 << len(a)):
-            l = 1
-            for k in range(len(a)):
-                l *= a[k] if (y & (1 << k)) != 0 else 1
-            if l not in m:
-                m[l] = 0
-            m[l] += 1
-        return m
-    return [createB(a) for a in A]
+def solve(N):
+    if N < 10:
+        return N
 
-def createA(A, c, N, M):
-    if len(c) == N:
-        A.append(list(c))
-        return
-    for x in range(2 if len(c) == 0 else c[-1], M + 1):
-        c.append(x)
-        createA(A, c, N, M)
-        del c[-1]
+    S = str(N)
+    M = len(S)
 
-def Pr(N, M, A):
-    nf = math.factorial(N)
-    mn = math.pow(M - 1, N)
-    k = nf / mn
-    def count_factorial(x):
-        res = 1
-        for i in range(2, M + 1):
-            res *= math.factorial(x.count(i))
-        return res
-    return [k / count_factorial(a) for a in A]
+    ans = 1
 
-def update(PrA, p, k):
-    return [pra * (pp[k] if k in pp else 0) for (pra, pp) in zip(PrA, p)]
-        
-def calc(N, M, a, A, p, PrA):
-    for k in a:
-        PrA = update(PrA, p, k)
-    return A[PrA.index(max(PrA))]
+    for d in range(1, M):
+        ans += 10 ** ((d + 1) / 2) - 1
+        if d > 1:
+            ans += 1
+        ans += 10 ** (d / 2) - 1
+
+    L = S[:M/2]
+    R = S[M/2:]
+
+    if int(R) == 0:
+        return solve(N - 1) + 1
+
+    if int(L[::-1]) == 1:
+        return ans + int(R)
+
+    ans += int(L[::-1])
+
+    ans += 1
+
+    ans += int(R) - 1
+    return ans
 
 def result():
-    R, N, M, K = [int(x) for x in raw_input().split()]
-    A = []
-    createA(A, [], N, M)
-    PrA = Pr(N, M, A)
-    p = createP(A)        
-
-    for r in range(R):
-        products = [int(k) for k in raw_input().split()]
-        print ''.join([str(i) for i in calc(N, M, products, A, p, list(PrA))])
+    return solve(int(raw_input()))
 
 if __name__ == "__main__":
     T = int(raw_input())
     for t in range(1, T + 1):
-        print "Case #{0}:".format(t)
-    result()
+        print "Case #{0}: {1}".format(t, result())
