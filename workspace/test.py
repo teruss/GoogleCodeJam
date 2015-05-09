@@ -18,6 +18,8 @@ class Test(unittest.TestCase):
         self.assertEqual(solve(5, 5, 14), 3)
     def test_case8(self):
         self.assertEqual(solve(4, 4, 9), 2)
+    def test_case9(self):
+        self.assertEqual(solve(15, 1, 15), 14)
 
 if __name__ == '__main__':
     unittest.main()

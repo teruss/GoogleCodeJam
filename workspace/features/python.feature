@@ -8,7 +8,7 @@ Feature: Solve problem
     Given a input file for B-small-practice
     When I execute python using the input file
     Then I see the output file
-  #   And check with the expected file
+    And check with the expected file
     
   # Scenario: Solve large by python
   #   Given a input file for A-large-practice

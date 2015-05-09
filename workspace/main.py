@@ -16,6 +16,9 @@ def solve(R, C, N):
     maxScore = (R - 1) * C + R * (C - 1)
     remains = R * C - N
 
+    if R == 1 or C == 1:
+        return maxScore - remains * 2
+
     if R % 2 == 1 and C % 2 == 1:
         pattern1 = get_score((R * C + 1) / 2, 4, ((R - 2) * (C - 2) + 1) / 2, remains)
         pattern2 = get_score(R * C / 2, 0, (R - 2) * (C - 2) / 2, remains)
