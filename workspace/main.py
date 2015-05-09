@@ -1,38 +1,34 @@
-import math
+def get_score(all, corners, inners, remains):
+    sides = all - corners - inners
+    score = min(inners, remains) * 4
+    if inners >= remains:
+        return score
+    remains -= inners
+    score += min(sides, remains) * 3
+    if sides >= remains:
+        return score
+    return score + (remains - sides) * 2
 
-def solve(N):
-    if N < 10:
-        return N
+def solve(R, C, N):
+    if N <= (R * C + 1) / 2:
+        return 0
 
-    S = str(N)
-    M = len(S)
+    maxScore = (R - 1) * C + R * (C - 1)
+    remains = R * C - N
 
-    ans = 1
+    if R == 1 or C == 1:
+        return maxScore - remains * 2
 
-    for d in range(1, M):
-        ans += 10 ** ((d + 1) / 2) - 1
-        if d > 1:
-            ans += 1
-        ans += 10 ** (d / 2) - 1
+    if R % 2 == 1 and C % 2 == 1:
+        pattern1 = get_score((R * C + 1) / 2, 4, ((R - 2) * (C - 2) + 1) / 2, remains)
+        pattern2 = get_score(R * C / 2, 0, (R - 2) * (C - 2) / 2, remains)
+        return maxScore - max(pattern1, pattern2)
 
-    L = S[:M/2]
-    R = S[M/2:]
-
-    if int(R) == 0:
-        return solve(N - 1) + 1
-
-    if int(L[::-1]) == 1:
-        return ans + int(R)
-
-    ans += int(L[::-1])
-
-    ans += 1
-
-    ans += int(R) - 1
-    return ans
+    return maxScore - get_score(R * C / 2, 2, (R - 2) * (C - 2) / 2, remains)
 
 def result():
-    return solve(int(raw_input()))
+    R, C, N = [int(x) for x in raw_input().split()]
+    return solve(R, C, N)
 
 if __name__ == "__main__":
     T = int(raw_input())
