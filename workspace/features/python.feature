@@ -4,11 +4,11 @@ Feature: Solve problem
     When I execute python with sample
     Then check the sample.out with sample.expected
 
-  Scenario: Solve
-    Given a input file for A-small-attempt0
-    When I execute python using the input file
-    Then I see the output file
-    And check with the expected file
+  # Scenario: Solve
+  #   Given a input file for A-small-attempt0
+  #   When I execute python using the input file
+  #   Then I see the output file
+  #   And check with the expected file
     
   # Scenario: Solve
   #   Given a input file for C-small-practice-2
