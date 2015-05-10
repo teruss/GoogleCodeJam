@@ -2,6 +2,7 @@ import os
 import os.path
 from behave import *
 import shlex, subprocess
+import glob
 
 @when(u'I create build directory')
 def step_impl(context):
@@ -61,13 +62,13 @@ def step_impl(context, filename):
     assert p is 0
 
 def compare_files(filename1, filename2):
+    print (filename1, filename2)
     f1 = open(filename1)
     f2 = open(filename2)
 
     file1lines = f1.readlines()
     file2lines = f2.readlines()
 
-    print (len(file1lines), ":", len(file2lines))
     assert len(file1lines) == len(file2lines)
 
     for i in range(0, len(file1lines)):
@@ -87,6 +88,7 @@ def step_impl(context):
 def exec_python(program):
     command = "python main.py < {0}.in > {0}.out".format(program)
     p = subprocess.call(command, shell=True)
+    print(command)
     assert p is 0
     
 @when(u'I execute python with {filename}')
@@ -96,3 +98,27 @@ def step_impl(context, filename):
 @when(u'I execute python using the input file')
 def step_impl(context):
     exec_python(context.program)
+
+@given(u'input files')
+def step_impl(context):
+    context.inputs = glob.glob("*.in")
+    assert context.inputs
+
+@when(u'I execute python using the input files')
+def step_impl(context):
+    context.programs = []
+    for filename in context.inputs:
+        program = filename[:-3]
+        context.programs.append(program)
+        exec_python(program)
+
+@then(u'I see the output files')
+def step_impl(context):
+    for program in context.programs:
+        assert os.path.isfile(program + ".out")
+
+@then(u'check with the expected files')
+def step_impl(context):
+    for program in context.programs:
+        if os.path.isfile(program + ".expected"):
+            compare_files(program + ".out", program + ".expected")

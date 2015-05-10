@@ -1,34 +1,45 @@
-def get_score(all, corners, inners, remains):
-    sides = all - corners - inners
-    score = min(inners, remains) * 4
-    if inners >= remains:
-        return score
-    remains -= inners
-    score += min(sides, remains) * 3
-    if sides >= remains:
-        return score
-    return score + (remains - sides) * 2
+import bisect
 
-def solve(R, C, N):
-    if N <= (R * C + 1) / 2:
-        return 0
+def solve(groups):
+    j = 0
+    maxH = 0
+    for D, H, M in groups:
+        maxH += H
 
-    maxScore = (R - 1) * C + R * (C - 1)
-    remains = R * C - N
+    lst = []
 
-    if R == 1 or C == 1:
-        return maxScore - remains * 2
+    for D, H, M in groups:
+        for h in range(H):
+            t = (M + h) * (360 - D)
+            bisect.insort(lst, (t, j, M + h, 0))
+            j += 1
 
-    if R % 2 == 1 and C % 2 == 1:
-        pattern1 = get_score((R * C + 1) / 2, 4, ((R - 2) * (C - 2) + 1) / 2, remains)
-        pattern2 = get_score(R * C / 2, 0, (R - 2) * (C - 2) / 2, remains)
-        return maxScore - max(pattern1, pattern2)
-
-    return maxScore - get_score(R * C / 2, 2, (R - 2) * (C - 2) / 2, remains)
+    c = maxH
+    res = maxH
+    used = []
+    lastT = -1
+    cnt = 0
+    while cnt < maxH:
+        t = lst[0][0]
+        while t == lst[0][0]:
+            current = lst[0]
+            if current[1] not in used:
+                used.append(current[1])
+                c -= 1
+            else:
+                c += 1
+                cnt += 1
+                
+            del lst[0]
+            
+            bisect.insort(lst, (current[0] + current[2] * 360, current[1], current[2], current[3] + 1))
+        res = min(res, c)
+                
+    return res
 
 def result():
-    R, C, N = [int(x) for x in raw_input().split()]
-    return solve(R, C, N)
+    N = int(raw_input())
+    return solve([(int(D), int(H), int(M)) for D, H, M in [raw_input().split() for _ in range(N)]])
 
 if __name__ == "__main__":
     T = int(raw_input())
