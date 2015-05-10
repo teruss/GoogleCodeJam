@@ -10,6 +10,8 @@ class Test(unittest.TestCase):
         self.assertEqual(solve([(180, 2, 1)]), 0)
     def test_case4(self):
         self.assertEqual(solve([(180, 1, 30), (180, 1, 10)]), 1)
+    def test_case5(self):
+        self.assertEqual(solve([(180, 3, 1)]), 1)
 
 
 if __name__ == '__main__':

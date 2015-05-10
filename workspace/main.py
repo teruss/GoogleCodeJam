@@ -1,14 +1,18 @@
 def solve(groups):
     lst = {}
     j = 0
-    maxH = len(groups)
+    maxH = 0
     for D, H, M in groups:
-        for i in range(maxH + 2):
-            t = (360 - D) * M + M * i * 360
-            if t not in lst:
-                lst[t] = []
-            lst[t].append(j)
-        j += 1
+        maxH += H
+
+    for D, H, M in groups:
+        for h in range(H):
+            for i in range(maxH + 2):
+                t = (M + h) * ((360 - D) + i * 360)
+                if t not in lst:
+                    lst[t] = []
+                lst[t].append(j)
+            j += 1
 
     c = maxH
     res = maxH
