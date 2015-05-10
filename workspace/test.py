@@ -3,17 +3,11 @@ import unittest
 
 class Test(unittest.TestCase):
     def test_case1(self):
-        self.assertEqual(solve([(1, 1, 12), (359, 1, 12), (2, 1, 12), (358, 1, 12)]), 0)
+        self.assertEqual(3, solve(1, 4, 2))
     def test_case2(self):
-        self.assertEqual(solve([(180, 1, 100000), (180, 1, 1)]), 1)
+        self.assertEqual(7, solve(1, 7, 7))
     def test_case3(self):
-        self.assertEqual(solve([(180, 2, 1)]), 0)
-    def test_case4(self):
-        self.assertEqual(solve([(180, 1, 30), (180, 1, 10)]), 1)
-    def test_case5(self):
-        self.assertEqual(solve([(180, 3, 1)]), 1)
-    def test_case5(self):
-        self.assertEqual(solve([(180, 3, 1)]), 1)
+        self.assertEqual(10, solve(2, 5, 1))
 
 
 if __name__ == '__main__':
