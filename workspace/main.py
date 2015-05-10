@@ -1,34 +1,32 @@
-def get_score(all, corners, inners, remains):
-    sides = all - corners - inners
-    score = min(inners, remains) * 4
-    if inners >= remains:
-        return score
-    remains -= inners
-    score += min(sides, remains) * 3
-    if sides >= remains:
-        return score
-    return score + (remains - sides) * 2
+def solve(groups):
+    lst = {}
+    j = 0
+    maxH = len(groups)
+    for D, H, M in groups:
+        for i in range(maxH + 2):
+            t = (360 - D) * M + M * i * 360
+            if t not in lst:
+                lst[t] = []
+            lst[t].append(j)
+        j += 1
 
-def solve(R, C, N):
-    if N <= (R * C + 1) / 2:
-        return 0
-
-    maxScore = (R - 1) * C + R * (C - 1)
-    remains = R * C - N
-
-    if R == 1 or C == 1:
-        return maxScore - remains * 2
-
-    if R % 2 == 1 and C % 2 == 1:
-        pattern1 = get_score((R * C + 1) / 2, 4, ((R - 2) * (C - 2) + 1) / 2, remains)
-        pattern2 = get_score(R * C / 2, 0, (R - 2) * (C - 2) / 2, remains)
-        return maxScore - max(pattern1, pattern2)
-
-    return maxScore - get_score(R * C / 2, 2, (R - 2) * (C - 2) / 2, remains)
+    c = maxH
+    res = maxH
+    used = []
+    for item in sorted(lst):
+        for h in lst[item]:
+            if h not in used:
+                used.append(h)
+                c -= 1
+            else:
+                c += 1
+        res = min(res, c)
+        
+    return res
 
 def result():
-    R, C, N = [int(x) for x in raw_input().split()]
-    return solve(R, C, N)
+    N = int(raw_input())
+    return solve([(int(D), int(H), int(M)) for D, H, M in [raw_input().split() for _ in range(N)]])
 
 if __name__ == "__main__":
     T = int(raw_input())
