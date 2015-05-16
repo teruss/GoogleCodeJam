@@ -1,4 +1,5 @@
 Feature: Solve problem
+  @python
   Scenario: Solve sample by python
     Given a file sample.in and sample.expected
     When I execute python with sample

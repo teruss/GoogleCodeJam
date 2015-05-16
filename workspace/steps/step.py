@@ -72,8 +72,7 @@ def compare_files(filename1, filename2):
     assert len(file1lines) == len(file2lines)
 
     for i in range(0, len(file1lines)):
-        print (file1lines[i] + "," + file2lines[i])
-        print (file1lines[i] == file2lines[i])
+        print (file1lines[i] + file2lines[i])
         assert file1lines[i] == file2lines[i]
     
 @then(u'check the {filename1} with {filename2}')
