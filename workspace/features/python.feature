@@ -9,5 +9,6 @@ Feature: Solve problem
     Examples: tests
     | program          |
     | sample           |
-    | A-small-practice |
-    | A-large-practice |
+    | B-small-practice |
+    | B-large-practice |
+  

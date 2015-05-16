@@ -3,6 +3,7 @@ import os.path
 from behave import *
 import shlex, subprocess
 import glob
+import re
 
 @when(u'I create build directory')
 def step_impl(context):
@@ -61,6 +62,11 @@ def step_impl(context, filename):
     print(p)
     assert p is 0
 
+def is_almost_same(line1, line2):
+    if line1 == line2:
+        return True
+    print(line1)
+    
 def compare_files(filename1, filename2):
     print (filename1, filename2)
     f1 = open(filename1)
@@ -71,9 +77,15 @@ def compare_files(filename1, filename2):
 
     assert len(file1lines) == len(file2lines)
 
+    prog = re.compile('(Case #\d+: )(\d+\.?\d*)')
     for i in range(0, len(file1lines)):
-        print (file1lines[i] + file2lines[i])
-        assert file1lines[i] == file2lines[i]
+        line1 = file1lines[i]
+        line2 = file2lines[i]
+        print (line1 + line2)
+        l1 = prog.match(line1)
+        l2 = prog.match(line2)
+        assert l1.group(1) == l2.group(1)
+        assert round(float(l1.group(2)) - float(l2.group(2)), 7) == 0
     
 @then(u'check the {filename1} with {filename2}')
 def step_impl(context, filename1, filename2):
@@ -82,7 +94,12 @@ def step_impl(context, filename1, filename2):
 @then(u'check with the expected file')
 def step_impl(context):
     p = context.program
-    compare_files(p + ".out", p + ".expected")
+    expected = p + ".expected"
+    if not os.path.isfile(expected):
+        context.scenario.skip()
+        return
+
+    compare_files(p + ".out", expected)
 
 def exec_python(program):
     command = "python main.py < {0}.in > {0}.out".format(program)
