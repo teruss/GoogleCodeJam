@@ -1,25 +1,13 @@
 Feature: Solve problem
   @python
-  Scenario: Solve sample by python
-    Given a file sample.in and sample.expected
-    When I execute python with sample
-    Then check the sample.out with sample.expected
-
-  # Scenario: Solve
-  #   Given a input file for A-small-attempt0
-  #   When I execute python using the input file
-  #   Then I see the output file
-  #   And check with the expected file
+  Scenario Outline: Solve <program> by python
+    Given a input file for <program>
+    When I execute python using the input file
+    Then I see the output file
+    And check with the expected file
     
-  # Scenario: Solve
-  #   Given a input file for C-small-practice-2
-  #   When I execute python using the input file
-  #   Then I see the output file
-  #   And check with the expected file
-
-    
-  # Scenario: Solve large by python
-  #   Given a input file for C-large-practice
-  #   When I execute python using the input file
-  #   Then I see the output file
-  #   And check with the expected file
+    Examples: tests
+    | program          |
+    | sample           |
+    | A-small-practice |
+    | A-large-practice |

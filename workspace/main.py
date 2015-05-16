@@ -1,5 +1,5 @@
 def solve(R, C, W):
-    return (R - 1) * C / W + (C - W) / W + W + (1 if C % W != 0 else 0)
+    return R * (C / W) + W - 1 + (1 if C % W != 0 else 0)
 
 def result():
     R, C, W = (int(x) for x in raw_input().split())
