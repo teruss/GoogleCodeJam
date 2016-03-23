@@ -5,3 +5,6 @@
 workspace/build
 *.pyc
 *.*~
+*.opendb
+*.sdf
+StoreCredit/Debug/
