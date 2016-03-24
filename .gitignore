@@ -8,3 +8,5 @@ workspace/build
 *.opendb
 *.sdf
 StoreCredit/Debug/
+*.tlog
+*.idb
