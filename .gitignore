@@ -10,3 +10,4 @@ workspace/build
 StoreCredit/Debug/
 *.tlog
 *.idb
+*.db
