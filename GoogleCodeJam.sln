@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CountingSheep", "CountingSh
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Revenge of the Pancakes", "Revenge of the Pancakes\Revenge of the Pancakes.vcxproj", "{A3A96BB4-6739-4DDE-B272-175BC019093A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CoinJam", "CoinJam\CoinJam.vcxproj", "{AB35ED62-F228-41BA-B434-841E80649A0E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -53,6 +55,14 @@ Global
 		{A3A96BB4-6739-4DDE-B272-175BC019093A}.Release|x64.Build.0 = Release|x64
 		{A3A96BB4-6739-4DDE-B272-175BC019093A}.Release|x86.ActiveCfg = Release|Win32
 		{A3A96BB4-6739-4DDE-B272-175BC019093A}.Release|x86.Build.0 = Release|Win32
+		{AB35ED62-F228-41BA-B434-841E80649A0E}.Debug|x64.ActiveCfg = Debug|x64
+		{AB35ED62-F228-41BA-B434-841E80649A0E}.Debug|x64.Build.0 = Debug|x64
+		{AB35ED62-F228-41BA-B434-841E80649A0E}.Debug|x86.ActiveCfg = Debug|Win32
+		{AB35ED62-F228-41BA-B434-841E80649A0E}.Debug|x86.Build.0 = Debug|Win32
+		{AB35ED62-F228-41BA-B434-841E80649A0E}.Release|x64.ActiveCfg = Release|x64
+		{AB35ED62-F228-41BA-B434-841E80649A0E}.Release|x64.Build.0 = Release|x64
+		{AB35ED62-F228-41BA-B434-841E80649A0E}.Release|x86.ActiveCfg = Release|Win32
+		{AB35ED62-F228-41BA-B434-841E80649A0E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,5 +70,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{0DC5748C-5C34-4DBD-957A-CC8F60824104} = {DB05E3AE-EAA9-45A8-A214-423F763DAA6A}
 		{A3A96BB4-6739-4DDE-B272-175BC019093A} = {DB05E3AE-EAA9-45A8-A214-423F763DAA6A}
+		{AB35ED62-F228-41BA-B434-841E80649A0E} = {DB05E3AE-EAA9-45A8-A214-423F763DAA6A}
 	EndGlobalSection
 EndGlobal
