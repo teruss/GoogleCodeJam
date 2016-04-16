@@ -11,3 +11,5 @@ StoreCredit/Debug/
 *.tlog
 *.idb
 *.db
+CoinJamCSharp/bin/
+obj
