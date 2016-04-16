@@ -13,3 +13,4 @@ StoreCredit/Debug/
 *.db
 CoinJamCSharp/bin/
 obj
+Debug/
