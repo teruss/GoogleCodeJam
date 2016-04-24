@@ -1,7 +1,6 @@
 *.feature~
 *.rb~
 *.py~
-*.out
 workspace/build
 *.pyc
 *.*~
