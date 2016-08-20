@@ -8,6 +8,67 @@ typedef map<int, int> Keys;
 typedef vector<pair<int, vector<int>>> Chests;
 typedef bitset<200> Flag;
 
+bool checkTarget(map<int, vector<int>> chestsKeys, Flag currentKeys, int target)
+{
+	auto ck = chestsKeys[target];
+	if (currentKeys[target])
+		return true;
+
+	auto types = ck;
+
+	for (auto t : types)
+	{
+		if (t == target)
+			continue;
+
+		chestsKeys.erase(target);
+		if (checkTarget(chestsKeys, currentKeys, t))
+			return true;
+		chestsKeys[target] = ck;
+	}
+	return false;
+}
+
+bool anyKeyReachable(Keys &keys, const Chests &chests, Flag flag)
+{
+	Flag neededKeys;
+	for (int i = 0; i < chests.size(); i++)
+	{
+		if (flag[i]) continue;
+
+		neededKeys[chests[i].first] = true;
+	}
+
+	Flag currentKeys;
+	for (auto p : keys)
+	{
+		if (p.second > 0)
+			currentKeys[p.first] = true;
+	}
+
+	if ((neededKeys & currentKeys) == neededKeys)
+		return true;
+
+	map<int, vector<int>> chestsKeys;
+	for (int i = 0; i < chests.size(); i++)
+	{
+		if (flag[i])
+			continue;
+		for (int j = 0; j < chests[i].second.size(); j++)
+		{
+			chestsKeys[chests[i].second[j]].push_back(chests[i].first);
+		}
+	}
+
+	for (auto ck : chestsKeys)
+	{
+		auto type = ck.first;
+		if (!checkTarget(chestsKeys, currentKeys, type))
+			return false;
+	}
+	return true;
+}
+
 bool check(Keys &keys, const Chests &chests, Flag flag, vector<int> &out)
 {
 	if (out.size() == chests.size())
@@ -38,6 +99,10 @@ bool check(Keys &keys, const Chests &chests, Flag flag, vector<int> &out)
 			return false;
 		}
 	}
+
+	if (!anyKeyReachable(keys, chests, flag))
+		return false;
+
 	for (int i = 0; i < chests.size(); i++)
 	{
 		auto type = chests[i].first;
@@ -84,6 +149,7 @@ int main()
 		}
 
 		vector<pair<int, vector<int>>> chests(N);
+		map<int, vector<int>> chestsKeys;
 		for (int i = 0; i < N; i++)
 		{
 			int keyType, numKeys;
@@ -92,6 +158,7 @@ int main()
 			for (int j = 0; j < numKeys; j++)
 			{
 				cin >> keysInChest[j];
+				chestsKeys[keysInChest[j]].push_back(i);
 			}
 			chests[i] = make_pair(keyType, keysInChest);
 		}
