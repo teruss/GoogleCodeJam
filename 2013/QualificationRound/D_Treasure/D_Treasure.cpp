@@ -6,10 +6,12 @@
 using namespace std;
 typedef map<int, int> Keys;
 typedef vector<pair<int, vector<int>>> Chests;
-typedef bitset<200> Flag;
+typedef bitset<201> Flag;
 
-bool checkTarget(map<int, vector<int>> chestsKeys, Flag currentKeys, int target)
+bool checkTarget(map<int, vector<int>> chestsKeys, Flag usedCK, Flag currentKeys, int target)
 {
+	if (usedCK[target])
+		return false;
 	auto ck = chestsKeys[target];
 	if (currentKeys[target])
 		return true;
@@ -18,13 +20,13 @@ bool checkTarget(map<int, vector<int>> chestsKeys, Flag currentKeys, int target)
 
 	for (auto t : types)
 	{
-		if (t == target)
+		if (t == target || usedCK[target])
 			continue;
 
-		chestsKeys.erase(target);
-		if (checkTarget(chestsKeys, currentKeys, t))
+		usedCK[target] = true;
+		if (checkTarget(chestsKeys, usedCK, currentKeys, t))
 			return true;
-		chestsKeys[target] = ck;
+		usedCK[target] = false;
 	}
 	return false;
 }
@@ -63,7 +65,7 @@ bool anyKeyReachable(Keys &keys, const Chests &chests, Flag flag)
 	for (auto ck : chestsKeys)
 	{
 		auto type = ck.first;
-		if (!checkTarget(chestsKeys, currentKeys, type))
+		if (!checkTarget(chestsKeys, Flag(), currentKeys, type))
 			return false;
 	}
 	return true;
