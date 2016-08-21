@@ -8,7 +8,7 @@ typedef map<int, int> Keys;
 typedef vector<pair<int, vector<int>>> Chests;
 typedef bitset<201> Flag;
 
-bool checkTarget(map<int, vector<int>> chestsKeys, Flag usedCK, Flag currentKeys, int target)
+bool checkTarget(map<int, vector<int>> chestsKeys, Flag &usedCK, Flag currentKeys, int target)
 {
 	if (usedCK[target])
 		return false;
@@ -65,8 +65,14 @@ bool anyKeyReachable(Keys &keys, const Chests &chests, Flag flag)
 	for (auto ck : chestsKeys)
 	{
 		auto type = ck.first;
-		if (!checkTarget(chestsKeys, Flag(), currentKeys, type))
+		Flag usedCK;
+		if (!checkTarget(chestsKeys, usedCK, currentKeys, type))
 			return false;
+
+		currentKeys |= usedCK;
+
+		if ((currentKeys & neededKeys) == neededKeys)
+			return true;
 	}
 	return true;
 }
