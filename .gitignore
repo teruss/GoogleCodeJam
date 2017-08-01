@@ -16,3 +16,4 @@ Debug/
 Release/
 .vs/
 *.user
+ipch/

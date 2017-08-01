@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StoreCredit", "StoreCredit\StoreCredit.vcxproj", "{57C5806F-8A4D-4874-AAE9-898529973CE6}"
 EndProject
@@ -36,6 +36,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Qualification Round 2013", "Qualification Round 2013", "{53899EE8-3229-4810-9D77-55576F372CAF}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "D_Treasure", "2013\QualificationRound\D_Treasure\D_Treasure.vcxproj", "{31D5FAF2-A4D4-4F1E-BFE2-DF80D9D3B45B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTest1", "2013\QualificationRound\UnitTest1\UnitTest1.vcxproj", "{50A0E2C0-F5C2-44E8-B584-285106CCBA38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -179,6 +181,16 @@ Global
 		{31D5FAF2-A4D4-4F1E-BFE2-DF80D9D3B45B}.Release|x64.Build.0 = Release|x64
 		{31D5FAF2-A4D4-4F1E-BFE2-DF80D9D3B45B}.Release|x86.ActiveCfg = Release|Win32
 		{31D5FAF2-A4D4-4F1E-BFE2-DF80D9D3B45B}.Release|x86.Build.0 = Release|Win32
+		{50A0E2C0-F5C2-44E8-B584-285106CCBA38}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{50A0E2C0-F5C2-44E8-B584-285106CCBA38}.Debug|x64.ActiveCfg = Debug|x64
+		{50A0E2C0-F5C2-44E8-B584-285106CCBA38}.Debug|x64.Build.0 = Debug|x64
+		{50A0E2C0-F5C2-44E8-B584-285106CCBA38}.Debug|x86.ActiveCfg = Debug|Win32
+		{50A0E2C0-F5C2-44E8-B584-285106CCBA38}.Debug|x86.Build.0 = Debug|Win32
+		{50A0E2C0-F5C2-44E8-B584-285106CCBA38}.Release|Any CPU.ActiveCfg = Release|Win32
+		{50A0E2C0-F5C2-44E8-B584-285106CCBA38}.Release|x64.ActiveCfg = Release|x64
+		{50A0E2C0-F5C2-44E8-B584-285106CCBA38}.Release|x64.Build.0 = Release|x64
+		{50A0E2C0-F5C2-44E8-B584-285106CCBA38}.Release|x86.ActiveCfg = Release|Win32
+		{50A0E2C0-F5C2-44E8-B584-285106CCBA38}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -195,5 +207,6 @@ Global
 		{EE2DC355-3058-4025-9D9F-C8ED9A049BD5} = {8A02D4FC-8FA8-4C6F-BE6C-4DA3112EA967}
 		{7CAF31C7-CF31-4555-B6E7-B3940E1D38CC} = {8A02D4FC-8FA8-4C6F-BE6C-4DA3112EA967}
 		{31D5FAF2-A4D4-4F1E-BFE2-DF80D9D3B45B} = {53899EE8-3229-4810-9D77-55576F372CAF}
+		{50A0E2C0-F5C2-44E8-B584-285106CCBA38} = {53899EE8-3229-4810-9D77-55576F372CAF}
 	EndGlobalSection
 EndGlobal
